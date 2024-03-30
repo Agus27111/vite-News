@@ -1,9 +1,10 @@
 import { useState } from "react";
-import classnames from "classnames";
-
-import shoppingLogo from "./assets/shopping-icon.svg";
-import plusIcon from "./assets/plus-icon.svg";
-import minusIcon from "./assets/minus-icon.svg";
+import Navbar from "./components/Navbar";
+import Container from "./components/Container";
+import SearchInput from "./components/SearchInput";
+import Info from "./components/Info";
+import Todos from "./components/Todos";
+import Empty from "./components/Empty";
 
 import "./App.css";
 
@@ -65,70 +66,30 @@ function App() {
 
   return (
     <>
-      <nav className="nav">
-        <img src={shoppingLogo} className="logo" alt="Shopping logo" />
-        <h1 className="nav-item">Daftar BelanjaKu</h1>
-      </nav>
-      <section className="container">
-        <form className="form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="list"
-            className="input"
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-            }}
-          />
-          <button className="addButton" type="submit">
-            Add
-          </button>
-        </form>
-        <div className="info">
-          <div className="infoTotal">Total List: {todos.length}</div>
-          <div className="infoTotal">{`Total Count: ${getTotalCount()}`}</div>
-          <div className="deleteAllButton" onClick={() => setTodos([])}>
-            Delete All
-          </div>
-        </div>
+      <Navbar />
+      <Container>
+        <SearchInput
+          value={value}
+          onSubmit={handleSubmit}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+        />
+        <Info
+          todosLength={todos.length}
+          getTotalCount={getTotalCount()}
+          onClick={() => setTodos([])}
+        />
         {todos.length > 0 ? (
-          <div className="todos">
-            {todos.map((todo, index, arr) => {
-              return (
-                <div
-                  className={`todo ${
-                    !(arr.length === index + 1) && "todoDivider"
-                  }`}
-                  key={index}
-                >
-                  {todo.title}
-                  <div className="todoIconWrapper">
-                    <div className="todoCount">{todo.count}</div>
-
-                    <button
-                      onClick={() => handleAdditionalCount(index)}
-                      className="todoActionButton"
-                    >
-                      <img src={plusIcon} alt="plus icon" />
-                    </button>
-                    <button
-                      className="todoActionButton"
-                      onClick={() => handleSubtractCount(index)}
-                    >
-                      <img src={minusIcon} alt="minus icon" />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <Todos
+            todos={todos}
+            handleAdditionalCount={(index) => handleAdditionalCount(index)}
+            handleSubtractCount={(index) => handleSubtractCount(index)}
+          />
         ) : (
-          <div className="empty">
-            {" "}
-            <h1>this is empty</h1>{" "}
-          </div>
+          <Empty />
         )}
-      </section>
+      </Container>
     </>
   );
 }

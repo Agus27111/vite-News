@@ -72,6 +72,39 @@
   background-color: var(--main-background-color);
   box-shadow: var(--main-box-shadow);
 }
+/* Info Section */
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 16px 0;
+}
+
+.infoTotal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--main-font-color);
+  font-size: 12px;
+}
+
+.infoTotal > p {
+  font-weight: bold;
+}
+
+.deleteAllButton {
+  background-color: unset;
+  border: none;
+  padding: unset;
+  cursor: pointer;
+  color: var(--danger-font-color);
+  font-size: 12px;
+  font-weight: bold;
+}
+
 /* todos displays */
 .todos {
   box-shadow: var(--main-box-shadow);
@@ -128,6 +161,10 @@
 
 .todoDivider {
   border-bottom: 1px solid var(--main-border-color);
+}
+.empty {
+  color: #61dafbaa;
+  font-size: 16px;
 }
 @media (prefers-reduced-motion: no-preference) {
   .container {

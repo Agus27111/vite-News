@@ -14,12 +14,53 @@ function App() {
     { title: "Susu SKM", count: 1 },
     { title: "Mie rebus", count: 1 },
   ]);
+  //hadnle handleSubmit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!value) {
+      alert("Kolom tidak boleh kosong bro");
+      return;
+    }
+    const addedTodos = [
+      ...todos,
+      {
+        title: value,
+        count: 1,
+      },
+    ];
+    setTodos(addedTodos);
+    //to make input clear again when we after click Add button
+    setValue("");
+  };
 
   //hadnle handleAdditionalCount
   const handleAdditionalCount = (index) => {
     const newTodos = [...todos];
     newTodos[index].count += 1;
     setTodos(newTodos);
+  };
+
+  //hadnle handleSubtractCount
+  const handleSubtractCount = (index) => {
+    const newTodos = [...todos];
+    if (newTodos[index].count > 0) {
+      //to make count 0 if it is 1
+      newTodos[index].count -= 1;
+      setTodos(newTodos);
+    } else {
+      //to remove if it is 0
+      newTodos.splice(index, 1);
+      setTodos(newTodos);
+    }
+  };
+
+  // getTotalCount
+  const getTotalCount = () => {
+    const total = todos.reduce((a, b) => {
+      return a + b.count;
+    }, 0);
+    return total;
   };
 
   return (
@@ -29,7 +70,7 @@ function App() {
         <h1 className="nav-item">Daftar BelanjaKu</h1>
       </nav>
       <section className="container">
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="list"
@@ -43,6 +84,13 @@ function App() {
             Add
           </button>
         </form>
+        <div className="info">
+          <div className="infoTotal">Total List: {todos.length}</div>
+          <div className="infoTotal">{`Total Count: ${getTotalCount()}`}</div>
+          <div className="deleteAllButton" onClick={() => setTodos([])}>
+            Delete All
+          </div>
+        </div>
         {todos.length > 0 ? (
           <div className="todos">
             {todos.map((todo, index, arr) => {
@@ -63,7 +111,10 @@ function App() {
                     >
                       <img src={plusIcon} alt="plus icon" />
                     </button>
-                    <button className="todoActionButton">
+                    <button
+                      className="todoActionButton"
+                      onClick={() => handleSubtractCount(index)}
+                    >
                       <img src={minusIcon} alt="minus icon" />
                     </button>
                   </div>

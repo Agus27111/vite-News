@@ -1,0 +1,86 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+/* Navbar */
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 55px;
+  background-color: #61dafbaa;
+  padding: 0 16px;
+}
+.logo {
+  height: 24px;
+  width: 24px;
+  padding: 0.8em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.nav-item {
+  font-size: 24px;
+  font-weight: bold;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+/* section */
+.container {
+  height: calc(100vh-55px);
+  background-color: blanchedalmond;
+  max-width: 480px;
+  padding: 16px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+/* Search Bar */
+.form {
+  display: flex;
+}
+.input {
+  flex: 1;
+  margin-right: 8px;
+  background-color: blanchedalmond;
+  box-shadow: var(--main-background-color);
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+
+  color: var(--main-font-color);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.addButton {
+  border: none;
+  border-radius: 6px;
+
+  color: var(--secondary-font-color);
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  width: 80px;
+  background-color: var(--main-background-color);
+  box-shadow: var(--main-box-shadow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
